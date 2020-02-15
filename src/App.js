@@ -9,7 +9,6 @@ class App extends Component {
       <Router basename="/">
         <Route path="/inicio" component={Layout} />
       </Router>
-      
     );
   }
 }
