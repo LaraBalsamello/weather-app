@@ -10,7 +10,15 @@ class Layout extends Component {
 
     state = {
         resultsSearch: [],
+        weatherSaved: []
     };
+
+    clickHandler = (weather) => {
+        let saved = [];
+        saved.push(weather);
+        console.log(weather)
+        this.setState({ weatherSaved: [...saved] })
+    }
 
     catchSearch = (value) => {
         this.setState({ resultsSearch: [] })
@@ -40,9 +48,9 @@ class Layout extends Component {
     render() {
         return (
             <Auxiliary className="page-container" >
-                <Toolbar></Toolbar>
+                <Toolbar weatherSaved={this.state.weatherSaved} showFav={true}></Toolbar>
                 <SearchBox getSearch={this.catchSearch}></SearchBox>
-                <ResultsBox results={this.state.resultsSearch}></ResultsBox>
+                <ResultsBox click={(weather) => { this.clickHandler(weather) }} results={this.state.resultsSearch}></ResultsBox>
             </Auxiliary>
         );
     }

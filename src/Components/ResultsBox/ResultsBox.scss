@@ -5,6 +5,8 @@
     padding: 2rem;
     padding-top: 1rem;
     border-radius: 1.5rem;
+    max-width: 20rem;
+    min-width: 50%;
     h2 {
         margin: 0;
         margin-bottom: 1rem;
@@ -16,12 +18,20 @@
         margin-top: 1rem;
         margin: 0px;
     }
+
+    .tiny-heart-container {
+        width: 100%;
+        text-align: end;
+        .small-icon {
+            font-size: 2rem;
+        }
+    }
 }
 
 .results-box-container {
     display: flex;
-    flex-wrap: wrap;
     width: 100%;
+    flex-wrap: wrap;
 }
 
 .fontawesome-icon {
@@ -43,5 +53,23 @@
     align-items: center;
     .temp {
         font-size: 5rem;
+    }
+}
+
+@media only screen and(min-width: 985px) {
+    .results-box {
+        min-width: 33%;
+    }
+}
+
+@media only screen and(max-width: 630px) {
+    .results-box-container {
+        min-width: 33%;
+        align-items: center;
+        flex-direction: column;
+    }
+    .results-box {
+        width: 100%;
+        min-width: 26rem; 
     }
 }

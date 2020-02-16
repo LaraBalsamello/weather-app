@@ -7,8 +7,15 @@
     margin-top: 3rem;
     input {
         width: 50%;
+        margin-bottom: 2rem;
+        height: 3rem;
+        border: 2px solid gainsboro;
+        border-radius: 6px;
+        padding: 0.5rem;    
     }
     label {
         margin-bottom: 1rem;
+        font-size: 1.3rem;
+        font-weight: 500;
     }
 }

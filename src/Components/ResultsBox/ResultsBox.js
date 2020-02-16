@@ -13,7 +13,8 @@ import {
     faSmog,
     faMoon,
     faCloudMoon,
-    faCloudMoonRain
+    faCloudMoonRain,
+    faHeart
 }
     from "@fortawesome/free-solid-svg-icons";
 
@@ -82,6 +83,10 @@ const ResultsBox = (props) => {
         return iconWeather;
     }
 
+    const handleClick = (weather) => {
+        props.click(weather);
+    }
+
     let toRenderArray = [];
     for (let i = 0; i < props.results.length; i++) {
         let result = props.results[i];
@@ -91,6 +96,9 @@ const ResultsBox = (props) => {
         let iconW = evaluateCondition(weather);
         city = (
             <div className="results-box" key={weather.id + "1"}>
+                <div className="tiny-heart-container" onClick={() => handleClick(weather)}>
+                    <FontAwesomeIcon className="fontawesome-icon small-icon" icon={faHeart} />
+                </div>
                 <h2 key={weather.id}>{weather.name}</h2>
                 <div className="box-head-container">
                     <div className="temp-container">

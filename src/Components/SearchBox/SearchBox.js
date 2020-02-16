@@ -25,8 +25,8 @@ class SearchBox extends Component {
     render() {
         return (
             <div className="search-box">
-                <label>Search a city!</label>
-                <input type="text" value={this.state.valueInput} onChange={this.searchHandler} ></input>
+                <label>Buscá una o varias ciudades!</label>
+                <input placeholder="Ejemplo: London, Lisbon, Buenos Aires" type="text" value={this.state.valueInput} onChange={this.searchHandler} ></input>
             </div>
         )
     }
