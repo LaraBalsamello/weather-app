@@ -1,20 +1,35 @@
-import React, { useState } from "react";
+import React, { Component } from "react";
 import "../SearchBox/SearchBox.scss";
 
 
-const SearchBox = () => {
-    const [valueInput] = useState();
+class SearchBox extends Component {
 
-    const searchHandler = (event) => {
-        console.log(event)
+    state = {
+        valueInput: "",
+        timer: 0
+    };
+
+    searchHandler = (e) => {
+        let durationSec = 1000;
+        clearTimeout(this.state.timer);
+        this.setState({
+            timer: setTimeout(() => {
+                if (this.state.valueInput.length >= 3) {
+                    this.props.getSearch(this.state.valueInput);
+                }
+            }, durationSec)
+        });
+        this.setState({ valueInput: e.target.value });
     }
-    return (
-        <div className="search-box">
-            <label>Search a city!</label>
-            <input type="text" value={valueInput} onChange={searchHandler}></input>
-        </div>
 
-    )
+    render() {
+        return (
+            <div className="search-box">
+                <label>Search a city!</label>
+                <input type="text" value={this.state.valueInput} onChange={this.searchHandler} ></input>
+            </div>
+        )
+    }
 };
 
 export default SearchBox; 

@@ -1,5 +1,47 @@
 .results-box {
     background-color: #ecdfc8;
-    width: 200px;
-    height: 100px;
+    width: 50%;
+    border: 1rem solid white;
+    padding: 2rem;
+    padding-top: 1rem;
+    border-radius: 1.5rem;
+    h2 {
+        margin: 0;
+        margin-bottom: 1rem;
+        font-weight: 900;
+        font-size: 2rem;
+        text-align: center;
+    }
+    p {
+        margin-top: 1rem;
+        margin: 0px;
+    }
+}
+
+.results-box-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.fontawesome-icon {
+    font-size: 7rem;
+    max-width: 6rem;
+    max-height: 6rem;
+}
+
+.box-head-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.temp-container {
+    display: flex;
+    padding-top: 0;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    align-items: center;
+    .temp {
+        font-size: 5rem;
+    }
 }
