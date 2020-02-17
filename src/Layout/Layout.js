@@ -17,9 +17,13 @@ class Layout extends Component {
 
     clickHandler = (weather) => {
         let saved = [...this.state.weatherSaved];
-        weather["saved"] = !weather.saved;
-        saved.push(weather);
-
+        if (weather.saved) {
+            weather["saved"] = !weather.saved;
+            saved.push(weather);
+        } else {
+            weather["saved"] = !weather.saved;
+            saved = saved.filter(s => s.id === weather.id);
+        }
         let arrRes = [...this.state.resultsSearch];
         arrRes = arrRes.filter(res => res.id !== weather.id);
         arrRes.push(weather);
