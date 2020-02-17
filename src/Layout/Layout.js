@@ -5,19 +5,44 @@ import SearchBox from "../Components/SearchBox/SearchBox";
 import ResultsBox from "../Components/ResultsBox/ResultsBox";
 import axios from "axios";
 import { WEATHER_API_KEY } from "../App";
+import WeatherData from "../interfaces/Weather";
 
 class Layout extends Component {
 
     state = {
         resultsSearch: [],
-        weatherSaved: []
+        weatherSaved: [],
+        loading: false
     };
 
     clickHandler = (weather) => {
-        let saved = [];
+        let saved = [...this.state.weatherSaved];
+        weather["saved"] = !weather.saved;
         saved.push(weather);
-        console.log(weather)
+
+        let arrRes = [...this.state.resultsSearch];
+        arrRes = arrRes.filter(res => res.id !== weather.id);
+        arrRes.push(weather);
+        saved = saved.sort((a, b) => {
+            if (a.name > b.name) {
+                return 1;
+            }
+            if (a.name < b.name) {
+                return -1;
+            }
+            return 0;
+        });
+        arrRes = arrRes.sort((a, b) => {
+            if (a.name > b.name) {
+                return 1;
+            }
+            if (a.name < b.name) {
+                return -1;
+            }
+            return 0;
+        });
         this.setState({ weatherSaved: [...saved] })
+        this.setState({ resultsSearch: [...arrRes] })
     }
 
     catchSearch = (value) => {
@@ -35,12 +60,23 @@ class Layout extends Component {
             valuesToSearch.push(value);
         }
         for (let index in valuesToSearch) {
+            this.setState({ loading: true })
             axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${valuesToSearch[index]}&units=metric&appid=${WEATHER_API_KEY}`)
                 .then(res => {
-                    const response = [...this.state.resultsSearch];
-                    response.push(res.data)
+                    this.setState({ loading: false })
+                    let weather = new WeatherData(res.data);
+                    let response = [...this.state.resultsSearch];
+                    response.push(weather);
+                    response = response.sort(function (a, b) {
+                        if (a.name > b.name) {
+                            return 1;
+                        }
+                        if (a.name < b.name) {
+                            return -1;
+                        }
+                        return 0;
+                    });
                     this.setState({ resultsSearch: [...response] })
-                    console.log(this.state.resultsSearch)
                 });
         }
 
@@ -50,7 +86,7 @@ class Layout extends Component {
             <Auxiliary className="page-container" >
                 <Toolbar weatherSaved={this.state.weatherSaved} showFav={true}></Toolbar>
                 <SearchBox getSearch={this.catchSearch}></SearchBox>
-                <ResultsBox click={(weather) => { this.clickHandler(weather) }} results={this.state.resultsSearch}></ResultsBox>
+                <ResultsBox loading={this.state.loading} click={(weather) => { this.clickHandler(weather) }} results={this.state.resultsSearch}></ResultsBox>
             </Auxiliary>
         );
     }

@@ -56,6 +56,25 @@
     }
 }
 
+.results-await-container {
+    color:  black;
+    opacity: 0.5;
+}
+
+.container-to-show {
+    color: grey;
+    width: 100%;
+    text-align: center;
+}
+
+.opacity {
+    opacity: 0.5;
+}
+
+.no-opacity {
+    opacity: 1!important;
+}
+
 @media only screen and(min-width: 985px) {
     .results-box {
         min-width: 33%;

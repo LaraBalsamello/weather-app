@@ -1,6 +1,5 @@
 import React from "react";
 import "../ResultsBox/ResultsBox.scss";
-import WeatherData from "../../interfaces/dataInterface";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faSun,
@@ -17,6 +16,7 @@ import {
     faHeart
 }
     from "@fortawesome/free-solid-svg-icons";
+import Loader from "../Loader/Loader";
 
 const ResultsBox = (props) => {
     const evaluateWind = (weather) => {
@@ -90,13 +90,19 @@ const ResultsBox = (props) => {
     let toRenderArray = [];
     for (let i = 0; i < props.results.length; i++) {
         let result = props.results[i];
-        let weather = new WeatherData(result);
+        let weather = result;
         let city;
         let windDirec = evaluateWind(weather);
         let iconW = evaluateCondition(weather);
+        let classesFav = ["tiny-heart-container", "opacity"];
+        if (weather.saved) {
+            classesFav = classesFav.filter(e => e !== "opacity");
+        } else {
+            classesFav.push("opacity");
+        }
         city = (
             <div className="results-box" key={weather.id + "1"}>
-                <div className="tiny-heart-container" onClick={() => handleClick(weather)}>
+                <div className={classesFav.join(" ")} onClick={() => handleClick(weather)}>
                     <FontAwesomeIcon className="fontawesome-icon small-icon" icon={faHeart} />
                 </div>
                 <h2 key={weather.id}>{weather.name}</h2>
@@ -112,6 +118,15 @@ const ResultsBox = (props) => {
         )
         toRenderArray.push(city);
     }
+
+    if (props.loading) {
+        toRenderArray.push(<Loader key="loader" />)
+    }
+
+    if (toRenderArray.length === 0) {
+        toRenderArray.push(<div key="noRes" className="container-to-show"><p>Tus resultados se mostrarán aquí</p></div>)
+    }
+
     return (
         <div className="results-box-container">
             {toRenderArray}

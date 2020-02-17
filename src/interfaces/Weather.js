@@ -1,5 +1,5 @@
 export default class WeatherData {
-    constructor(model) {
+    constructor(model, saved = false) {
         this.coord = model.coord;
         this.weather = model.weather;
         this.base = model.base;
@@ -13,6 +13,6 @@ export default class WeatherData {
         this.id = model.id;
         this.name = model.name;
         this.cod = model.cod;
+        this.saved = saved;
     }
-
 }
