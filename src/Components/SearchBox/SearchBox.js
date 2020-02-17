@@ -11,7 +11,6 @@ class SearchBox extends Component {
     };
 
     searchHandler = (e, duration) => {
-        console.log('trigger')
         let durationSec = duration;
         clearTimeout(this.state.timer);
         this.setState({
