@@ -19,12 +19,12 @@ class Layout extends Component {
 
     clickHandler = (weather) => {
         let saved = [...this.state.weatherSaved];
-        if (weather.saved) {
-            weather["saved"] = !weather.saved;
+        if (weather.saved === false) {
             saved.push(weather);
+            weather["saved"] = true;
         } else {
-            weather["saved"] = !weather.saved;
-            saved = saved.filter(s => s.id === weather.id);
+            weather["saved"] = false;
+            saved = saved.filter(s => s.id !== weather.id);
         }
         let arrRes = [...this.state.resultsSearch];
         arrRes = arrRes.filter(res => res.id !== weather.id);
@@ -96,7 +96,12 @@ class Layout extends Component {
             <Auxiliary className="page-container" >
                 <Toolbar weatherSaved={this.state.weatherSaved} showFav={true}></Toolbar>
                 <SearchBox getSearch={this.catchSearch}></SearchBox>
-                <ResultsBox loading={this.state.loading} click={(weather) => { this.clickHandler(weather) }} results={this.state.resultsSearch}></ResultsBox>
+                <ResultsBox
+                    dontShowHeart={false}
+                    loading={this.state.loading}
+                    click={(weather) => { this.clickHandler(weather) }}
+                    results={this.state.resultsSearch}>
+                </ResultsBox>
                 {this.state.error}
             </Auxiliary>
         );

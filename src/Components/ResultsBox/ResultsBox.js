@@ -100,11 +100,16 @@ const ResultsBox = (props) => {
         } else {
             classesFav.push("opacity");
         }
+        let heart = (
+            <div className={classesFav.join(" ")} onClick={() => handleClick(weather)}>
+                <FontAwesomeIcon className="fontawesome-icon small-icon" icon={faHeart} />
+            </div>)
+        if (props.dontShowHeart === true) {
+            heart = null;
+        }
         city = (
             <div className="results-box" key={weather.id + "1"}>
-                <div className={classesFav.join(" ")} onClick={() => handleClick(weather)}>
-                    <FontAwesomeIcon className="fontawesome-icon small-icon" icon={faHeart} />
-                </div>
+                {heart}
                 <h2 key={weather.id}>{weather.name}</h2>
                 <div className="box-head-container">
                     <div className="temp-container">

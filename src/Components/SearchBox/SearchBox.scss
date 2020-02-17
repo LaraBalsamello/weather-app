@@ -19,3 +19,22 @@
         font-weight: 500;
     }
 }
+
+.small-search-icon {
+    font-size: 2rem !important;
+    margin-left: 1rem;
+    margin-bottom: 2rem;
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    width: 90%;
+    align-items: center;
+}
+
+.for-cursor {
+    :hover {
+        cursor: pointer;
+    }
+}

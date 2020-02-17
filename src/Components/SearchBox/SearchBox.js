@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "../SearchBox/SearchBox.scss";
-
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class SearchBox extends Component {
 
@@ -9,8 +10,9 @@ class SearchBox extends Component {
         timer: 0
     };
 
-    searchHandler = (e) => {
-        let durationSec = 1000;
+    searchHandler = (e, duration) => {
+        console.log('trigger')
+        let durationSec = duration;
         clearTimeout(this.state.timer);
         this.setState({
             timer: setTimeout(() => {
@@ -26,7 +28,19 @@ class SearchBox extends Component {
         return (
             <div className="search-box">
                 <label>Buscá una o varias ciudades!</label>
-                <input placeholder="Ejemplo: London, Lisbon, Buenos Aires" type="text" value={this.state.valueInput} onChange={this.searchHandler} ></input>
+                <div className="search-container">
+                    <input
+                        placeholder="Ejemplo: London, Lisbon, Buenos Aires"
+                        type="text"
+                        value={this.state.valueInput}
+                        onChange={(e) => { this.searchHandler(e, 1000) }} >
+                    </input>
+                    <div className="for-cursor" onChange={(e) => { this.searchHandler(e, 0) }}>
+                        <FontAwesomeIcon
+                            className="fontawesome-icon small-search-icon"
+                            icon={faSearch} />
+                    </div>
+                </div>
             </div>
         )
     }

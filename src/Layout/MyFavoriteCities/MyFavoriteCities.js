@@ -18,7 +18,7 @@ class MyFavouriteCities extends Component {
         if (this.state && this.state.savedCities.length === 0) {
             toRender = (<div className="container-no-results"><p>No tenés ciudades favoritas guardadas</p></div>);
         } else {
-            toRender = (<ResultBox results={this.state.savedCities}></ResultBox>
+            toRender = (<ResultBox results={this.state.savedCities} dontShowHeart={true}></ResultBox>
             );
         }
         return (
